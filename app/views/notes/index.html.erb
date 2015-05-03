@@ -4,29 +4,30 @@
 		<%= f.text_area :text %>
 
 	<% end %>
+
+	<script type="text/javascript">
+		$(function() {
+			prev_text = $("#note_text").val();
+			setInterval(autoSavePost, 5000)
+		});
+
+		function autoSavePost() {
+			var new_text = $("#note_text").val();
+
+			if (new_text !== prev_text) {
+				$.ajax({
+				type: "POST",
+				url: "/notes/<%= @note.id %>",
+				dataType: "script",
+				data: $(".edit_note").serialize(),
+				success: function(data) {
+				  console.log("saved");
+				}
+				});
+				prev_text = new_text;
+			}
+		}
+	</script>
 <% end %>
 
 
-<script type="text/javascript">
-	$(function() {
-		prev_text = $("#note_text").val();
-		setInterval(autoSavePost, 5000)
-	});
-
-	function autoSavePost() {
-		var new_text = $("#note_text").val();
-
-		if (new_text !== prev_text) {
-			$.ajax({
-			type: "POST",
-			url: "/notes/<%= @note.id %>",
-			dataType: "script",
-			data: $(".edit_note").serialize(),
-			success: function(data) {
-			  console.log("saved");
-			}
-			});
-			prev_text = new_text;
-		}
-	}
-</script>
