@@ -13,9 +13,7 @@
 <% else %>
 	<%= link_to "Sign up with Twitter", "/auth/twitter" %>
 <% end %>
-<% flash.each do |name, message| %>
-	<%= content_tag :div, message, id: "flash_#{name}" %>
-<% end %>
+
 <%= yield %>
 
 </body>

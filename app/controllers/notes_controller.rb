@@ -2,8 +2,10 @@ class NotesController < ApplicationController
 
 	def index
 		if current_user
-			@note = Note.find_by_user_id(current_user.id)
-			if @note == nil
+			Note.uncached do
+				@note = Note.find_by_user_id(current_user.id)
+			end
+			if @note === nil
 				@note = Note.create(:user_id => current_user.id)
 				redirect_to root_path
 			end

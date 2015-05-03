@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
 	has_one :note
 
 	def self.from_omniauth(auth)
-		logger.debug("Params auth debug:")
-		logger.debug(auth.inspect)
 		where(:uid => auth["uid"], :provider => auth["provider"]).first || create_from_omniauth(auth)
 	end
 
