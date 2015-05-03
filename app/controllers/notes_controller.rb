@@ -11,7 +11,7 @@ class NotesController < ApplicationController
 	end
 
 	def update
-		note = Note.find(params[:id])
+		note = Note.find_by_user_id(current_user.id)
 		note.update_attributes(note_params)
 		
 		redirect_to root_path
@@ -19,7 +19,7 @@ class NotesController < ApplicationController
 
 	private
 		def note_params
-			params.require(:note).permit(:id, :text)
+			params.require(:note).permit(:text)
 		end
 
 end
