@@ -2,7 +2,7 @@ class NotesController < ApplicationController
 
 	def index
 		if current_user
-			@note = current_user.note
+			@note = Note.find_by_user_id(current_user.id)
 			if @note == nil
 				@note = Note.create(:user_id => current_user.id)
 				redirect_to root_path
