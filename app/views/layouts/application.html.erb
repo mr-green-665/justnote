@@ -8,7 +8,9 @@
 </head>
 <body>
 
-<% if !current_user %>
+<% if current_user %>
+	<%= @current_user.name %>
+<% else %>
 	<%= link_to "Sign up with Twitter", "/auth/twitter" %>
 <% end %>
 <% flash.each do |name, message| %>
