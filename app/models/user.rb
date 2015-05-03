@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 	def self.from_omniauth(auth)
 		logger.debug("Params auth debug:")
 		logger.debug(auth.inspect)
-		where(:provider => auth["uid"], :uid => auth["provider"]).first || create_from_omniauth(auth)
+		where(:uid => auth["uid"], :provider => auth["provider"]).first || create_from_omniauth(auth)
 	end
 
 	def self.create_from_omniauth(auth)
