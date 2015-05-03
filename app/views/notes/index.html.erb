@@ -1,8 +1,11 @@
-<%= form_for @note do |f| %>
+<% if @note %>
+	<%= form_for @note do |f| %>
 
-	<%= f.text_area :text %>
+		<%= f.text_area :text %>
 
+	<% end %>
 <% end %>
+
 
 <script type="text/javascript">
 	$(function() {
